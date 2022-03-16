@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Crear Venta</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+</head>
+<body>
+	<header th:replace="Nav::header"> </header>
+	<br />
+	<div class="container-fluid row col-12">
+		<div class="col-8">
+			<div
+				style="background: silver; border-width: thick; border-style: solid; border-color: black;">				
+					<h1 style="color: black;">Listado de Productos</h1>
+
+					<label for="producto">Filtrar Producto</label><br /> <input
+						class="light-table-filter" data-table="order-table" type="search"
+						placeholder="Filtro" aria-label="Search"> <br /> <br />
+					<div
+						style="overflow: scroll; max-height: 300px; min-height: 300px; height: auto; width: auto">
+						<table class="table order-table" id="mytable">
+							<thead class="table-dark ">
+								<tr>
+									<th scope="col">Codigo</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Precio</th>
+									<th scope="col">Color</th>
+									<th scope="col">Marca</th>
+									<th scope="col">Rubro</th>
+									<th scope="col">Talle</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="producto : ${productos}">
+
+									<!-- columna 1  codigo -->
+									<td th:text="${producto.codigo}"></td>
+
+									<!-- columna 2 Nombre-->
+									<td th:text="${producto.nombre}"></td>
+
+									<!-- columna 3 precio Final -->
+									<td th:text="${producto.precioFinal}"></td>
+
+									<!-- columna 4 color-->
+									<td th:text="${producto.color.nombre}"></td>
+
+									<!-- columna 5 marca -->
+									<td th:text="${producto.marca.nombre}"></td>
+
+									<!-- columna 6 rubro -->
+									<td th:text="${producto.rubro.nombre}"></td>
+
+									<!-- columna 7 talle-->
+									<td th:text="${producto.talle.descripcion}"></td>
+
+									<!-- columna 11 eliminar -->
+									<td><a class="btn btn-success"
+										th:href="@{/venta/agregarProducto} + '?idProducto=' + ${producto.idProductos} + '&idVenta=' + ${venta.idVentas}">Agregar
+											<i class="fa fa-edit"></i>
+									</a></td>
+								</tr>
+								<!-- fin de la fila -->
+							</tbody>
+							<!-- fin tbody-->
+						</table>
+						<!-- fin productos -->
+					</div>
+			</div>
+			<br />
+			<!-- fin del scroll productos -->
+			<div
+				style="background: silver; border-width: thick; border-style: solid; border-color: black;">
+				<h1 style="color: black;">Lineas de Venta</h1>
+
+				<div
+					style="overflow: scroll; max-height: 300px; min-height: 300px; height: auto; width: auto">
+					<table class="table " id="mytable">
+						<thead class="table-dark ">
+							<tr>
+								<th scope="col">Codigo</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Precio</th>
+								<th scope="col">Color</th>
+								<th scope="col">Marca</th>
+								<th scope="col">Rubro</th>
+								<th scope="col">Talle</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="lineaDeVenta : ${venta.lineasDeVenta}">
+
+								<!-- columna 1  codigo -->
+								<td th:text="${lineaDeVenta.producto.codigo}"></td>
+
+								<!-- columna 2 Nombre-->
+								<td th:text="${lineaDeVenta.producto.nombre}"></td>
+
+								<!-- columna 3 precio Final -->
+								<td th:text="${lineaDeVenta.producto.precioFinal}"></td>
+
+								<!-- columna 4 color-->
+								<td th:text="${lineaDeVenta.producto.color.nombre}"></td>
+
+								<!-- columna 5 marca -->
+								<td th:text="${lineaDeVenta.producto.marca.nombre}"></td>
+
+								<!-- columna 6 rubro -->
+								<td th:text="${lineaDeVenta.producto.rubro.nombre}"></td>
+
+								<!-- columna 7 talle-->
+								<td th:text="${lineaDeVenta.producto.talle.descripcion}"></td>
+
+								<!-- columna 11 eliminar -->
+								<td><a class="btn btn-success"
+									th:href="@{/venta/quitarProducto} + '?idLineaDeVenta=' + ${lineaDeVenta.idLineaDeVenta} + '&idVenta=' + ${venta.idVentas}">Eliminar
+										<i class="fa fa-edit"></i>
+								</a></td>
+							</tr>
+							<!-- fin de la fila -->
+						</tbody>
+						<!-- fin tbody-->
+					</table>
+					<!-- fin productos -->
+				</div>
+				<!-- fin del scroll productos -->
+			</div>
+		</div>
+		<!--div tabla columna tabla -->
+		<div Class="container col-4 "
+			style="background: silver; border-width: thick; border-style: solid; border-color: black;">	
+			<div class="form-group">
+				<h2>Clientes</h2>				
+					<div class="form-group">
+						<label for="producto">Filtrar Cliente</label><br /> <input
+							class="light-table-filter" data-table="order-tablee"
+							type="search" placeholder="Filtro" aria-label="Search"> <br />
+						<br />
+					
+					
+				</div>
+			</div>
+			<div
+				style="background: silver; border-style: solid; border-color: black; overflow: scroll; max-height: 300px; min-height: 300px; height: auto; width: auto">
+				<table class="table order-tablee" id="mytable">
+					<thead class="table-dark ">
+						<tr>
+							<th scope="col">CUIT</th>
+							<th scope="col">Nombre</th>
+							<th scope="col"></th>
+
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="cliente : ${clientes}">
+
+							<!-- columna 1  cuit -->
+							<td th:text="${cliente.cuit}"></td>
+							<!-- columna 1  nombre -->
+							<td th:text="${cliente.nombre}"></td>
+							<td><a class="btn btn-success"
+								th:href="@{/venta/agregarCliente} +'?idCliente='+${cliente.idCliente}">Seleccionar
+									<i class="fa fa-edit"></i>
+							</a></td>
+
+
+						</tr>
+						<!-- fin de la fila -->
+					</tbody>
+					<!-- fin tbody-->
+				</table>
+			</div>
+			<br /> <br />
+			<div
+				style="background: silver; border-style: solid; border-color: black;">
+				<div class="container row">
+					<div class="form-group input-group">
+						<h2>Cliente:</h2>
+						<div class="form-group">
+
+							<input
+								style="padding: 7px 0; text-align: center; width: 230px; background: white; color: black;"
+								type="text" name="total" th:if="${venta.cliente != null}"
+								th:value="${venta.cliente.nombre}" disabled /> <a
+								class="btn btn-success" th:href="@{/venta/quitarCliente}">Eliminar
+								<i class="fa fa-edit"></i>
+							</a> <br>
+						</div>
+					</div>
+				</div>
+
+				<br />
+			</div>
+			<br>
+			<div class="container"
+				style="background: silver; border-style: solid; border-color: black;">
+				<br>
+				<div>
+					<div class="form-group">
+						<h2>Total Facturado</h2>
+					</div>
+				</div>
+				<div>
+					<div class="form-group">
+						<input
+							style="text-align: center; width: 250px; background: white; color: black;"
+							type="text" name="total" th:if="${venta.lineasDeVenta != null}"
+							th:value="${venta.sumaTotal}" disabled /> <br>
+					</div>
+				</div>
+				<br />
+			</div>
+			<div>
+				<br> <br>
+				<div>
+					<div class="form-groupp" style="text-align: center;">
+					<a
+								class="btn btn-success" th:href="@{/venta/finalizarVenta} +'?idVenta='+${venta}">FINALIZAR</a>
+							
+					</div>
+				</div>
+			</div>
+			<!--div resultados -->
+			
+		</div>
+		<!--div container -->
+		
+	</div>
+	<!--Container  -->
+	</div>
+	<!-- Fondo gris-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<!-- Sript para trabajar con el buscador -->
+	<script type="text/javascript">
+		(function(document) {
+			'use strict';
+
+			var LightTableFilter = (function(Arr) {
+
+				var _input;
+
+				function _onInputEvent(e) {
+					_input = e.target;
+					var tables = document.getElementsByClassName(_input
+							.getAttribute('data-table'));
+					Arr.forEach.call(tables, function(table) {
+						Arr.forEach.call(table.tBodies, function(tbody) {
+							Arr.forEach.call(tbody.rows, _filter);
+						});
+					});
+				}
+
+				function _filter(row) {
+					var text = row.textContent.toLowerCase(), val = _input.value
+							.toLowerCase();
+					row.style.display = text.indexOf(val) === -1 ? 'none'
+							: 'table-row';
+				}
+
+				return {
+					init : function() {
+						var inputs = document
+								.getElementsByClassName('light-table-filter');
+						Arr.forEach.call(inputs, function(input) {
+							input.oninput = _onInputEvent;
+						});
+					}
+				};
+			})(Array.prototype);
+
+			document.addEventListener('readystatechange', function() {
+				if (document.readyState === 'complete') {
+					LightTableFilter.init();
+				}
+			});
+
+		})(document);
+	</script>
+
+</body>
+</html>

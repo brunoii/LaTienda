@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Crear Empleado</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+</head>
+<body>
+	<header th:replace="Nav::header"> </header>
+	<div>
+		
+
+		<br>
+		<div class="container ">
+			<div class="row col-8 bg-dark"
+				style="color: white; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity = 80); -khtml-opacity: 0.8;">
+				<h1 color="red">Agregar Empleado</h1>
+				<br />
+			</div>
+			<!-- Titulo -->
+			<div class="row col-8 bg-dark"
+				style="color: white; opacity: 0.8; -moz-opacity: 0.8; filter: alpha(opacity = 80); -khtml-opacity: 0.8;">
+				<form th:action="@{/empleado/agregarEmpleado}"
+					th:object="${empleado}" method="POST">
+					<div class="row bg-dark">
+						<div class="col-md-6">							
+							<div class="form-group">
+								<label for="nombre">Nombre</label><br /> <input
+									style="width: 300px; height: 40px;" type="text" name="nombre"
+									th:field="*{nombre}" required />
+							</div>
+							<br />
+							<!-- Nombre -->
+							<div class="form-group">
+								<label for="ñegajo">Legajo</label><br /> <input type="text"
+									style="width: 300px; height: 40px;" name="legajo"
+									th:field="*{legajo}" required />
+							</div>
+							<br />
+							<!-- legajo -->
+							<div class="form-group">
+								<label for="domicilio">Domicilio</label> <br />
+								<input type="text" style="width: 300px; height: 40px;"
+									name="domicilio" th:field="*{domicilio}" required />
+							</div>
+							<br />
+							<!-- domicilio -->						
+					</div>		
+					</div>		
+					<!-- Row que contiene todo  -->
+					<div>
+					 <br />
+						<input class="btn btn-success" type="submit"
+							name="agregarEmpleado" value="Agregar Empleado" />
+					</div> <br />
+					<!-- Boton formulario -->
+				</form>
+				<!-- Formulario -->
+			</div>
+			<!-- Col que contiene todo -->
+		</div>
+		<!-- Container -->
+	</div>
+	<!-- Imagen de fondo -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<!-- Sript para trabajar con el buscador -->
+	<script type="text/javascript">
+		(function(document) {
+			'use strict';
+
+			var LightTableFilter = (function(Arr) {
+
+				var _input;
+
+				function _onInputEvent(e) {
+					_input = e.target;
+					var tables = document.getElementsByClassName(_input
+							.getAttribute('data-table'));
+					Arr.forEach.call(tables, function(table) {
+						Arr.forEach.call(table.tBodies, function(tbody) {
+							Arr.forEach.call(tbody.rows, _filter);
+						});
+					});
+				}
+
+				function _filter(row) {
+					var text = row.textContent.toLowerCase(), val = _input.value
+							.toLowerCase();
+					row.style.display = text.indexOf(val) === -1 ? 'none'
+							: 'table-row';
+				}
+
+				return {
+					init : function() {
+						var inputs = document
+								.getElementsByClassName('light-table-filter');
+						Arr.forEach.call(inputs, function(input) {
+							input.oninput = _onInputEvent;
+						});
+					}
+				};
+			})(Array.prototype);
+
+			document.addEventListener('readystatechange', function() {
+				if (document.readyState === 'complete') {
+					LightTableFilter.init();
+				}
+			});
+
+		})(document);
+	</script>
+	</div>
+</body>
+</html>
